@@ -1,0 +1,800 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* =========================================================
+   BASE THEME
+   ========================================================= */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    --radius: 0.5rem;
+
+    /* Romantic palette */
+    --cream: 20 100% 98%;
+    --blush: 342 62% 92%;
+    --rosewood: 340 49% 56%;
+    --plum: 342 45% 33%;
+    --ink: 338 24% 13%;
+
+    /* Typography */
+    --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-script: 'Dancing Script', cursive;
+
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --cream: 20 100% 98%;
+    --blush: 342 62% 92%;
+    --rosewood: 340 49% 56%;
+    --plum: 342 45% 33%;
+    --ink: 338 24% 13%;
+
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}
+
+
+/* =========================================================
+   STICKY NOTE FLIP SYSTEM
+   ========================================================= */
+
+.sticky-note-shell {
+  width: 180px;
+  height: 210px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 600ms ease-in-out;
+  cursor: pointer;
+}
+
+.sticky-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 6px;
+
+  box-shadow:
+    0 10px 22px rgba(74, 63, 63, 0.18),
+    0 2px 6px rgba(74, 63, 63, 0.12);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.sticky-note-shell:hover .sticky-face {
+  box-shadow:
+    0 18px 34px rgba(74, 63, 63, 0.26),
+    0 4px 10px rgba(74, 63, 63, 0.16);
+}
+
+.sticky-front {
+  background: #fff;
+  padding: 8px 8px 26px;
+}
+
+.sticky-back {
+  transform: rotateY(180deg);
+  background: #FCEEE9;
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.sticky-note-shell:focus-within .sticky-face,
+.sticky-face:focus-visible {
+  outline: 2px dashed #E5989B;
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   POLAROID
+   ========================================================= */
+
+.polaroid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.polaroid-img {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.polaroid-caption {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #4A3F3F;
+  font-size: 13px;
+  padding-top: 6px;
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   WASHI TAPE
+   ========================================================= */
+
+.tape {
+  position: absolute;
+  width: 46px;
+  height: 16px;
+  background: rgba(229, 152, 155, 0.45);
+  box-shadow: 0 1px 2px rgba(74, 63, 63, 0.15);
+  border-radius: 1px;
+}
+
+.tape-tl {
+  top: -7px;
+  left: -10px;
+  transform: rotate(-22deg);
+}
+
+.tape-br {
+  bottom: -6px;
+  right: -10px;
+  transform: rotate(20deg);
+}
+
+
+/* =========================================================
+   NOTE PAPER
+   ========================================================= */
+
+.note-paper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-handwriting {
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: 22px;
+  line-height: 1.4;
+  color: #4A3F3F;
+}
+
+.note-signature {
+  margin-top: 10px;
+  font-family: "Brush Script MT", cursive;
+  font-size: 16px;
+  color: #E5989B;
+}
+
+.note-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  color: #4A3F3F;
+  opacity: 0;
+
+  transition: opacity 200ms;
+
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.sticky-back:hover .note-delete {
+  opacity: 0.7;
+}
+
+.note-delete:hover {
+  opacity: 1;
+  color: #b54545;
+}
+
+
+/* =========================================================
+   ROMANTIC LUXURY SYSTEM
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Glass */
+.glass {
+  background: rgba(255, 248, 245, 0.62);
+
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+
+  border: 1px solid rgba(198, 87, 123, 0.14);
+}
+
+.glass-strong {
+  background: rgba(255, 248, 245, 0.88);
+
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+
+  border: 1px solid rgba(198, 87, 123, 0.16);
+}
+
+
+/* Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+/* Shadows */
+.soft-shadow {
+  box-shadow:
+    0 18px 50px -18px rgba(122, 46, 68, 0.28),
+    0 4px 14px -6px rgba(122, 46, 68, 0.14);
+}
+
+
+/* Lift */
+.lift {
+  transition:
+    transform 500ms cubic-bezier(.22, 1, .36, 1),
+    box-shadow 500ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.lift:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 26px 60px -20px rgba(122, 46, 68, 0.34),
+    0 6px 18px -8px rgba(122, 46, 68, 0.18);
+}
+
+
+/* Image zoom */
+.img-zoom img {
+  transition:
+    transform 900ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.06);
+}
+
+
+/* =========================================================
+   GENERAL ANIMATIONS
+   ========================================================= */
+
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(198, 87, 123, 0.35);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 18px rgba(198, 87, 123, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(198, 87, 123, 0);
+  }
+}
+
+.animate-float-soft {
+  animation: floatSoft 7s ease-in-out infinite;
+}
+
+.animate-rise {
+  animation: riseIn .8s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2.6s ease-out infinite;
+}
+
+
+/* =========================================================
+   3D GLASS FLOATING PARTICLES
+   ========================================================= */
+
+/*
+  Main floating motion.
+
+  The particles:
+  - rise slowly
+  - sway horizontally
+  - move through different Z depths
+  - change scale
+  - rotate gently
+*/
+
+@keyframes particle-float-3d {
+  0% {
+    transform:
+      translate3d(0, 12vh, 0)
+      scale(0.55)
+      rotate(0deg);
+
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.35;
+  }
+
+  22% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift) * 0.45),
+        calc(var(--particle-rise) * -0.2),
+        30px
+      )
+      scale(0.88)
+      rotate(55deg);
+  }
+
+  40% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift) * -0.65),
+        calc(var(--particle-rise) * -0.4),
+        80px
+      )
+      scale(1.05)
+      rotate(130deg);
+  }
+
+  58% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift) * 0.7),
+        calc(var(--particle-rise) * -0.58),
+        120px
+      )
+      scale(0.82)
+      rotate(200deg);
+  }
+
+  76% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift) * -0.4),
+        calc(var(--particle-rise) * -0.78),
+        70px
+      )
+      scale(1.08)
+      rotate(280deg);
+  }
+
+  90% {
+    opacity: 0.18;
+  }
+
+  100% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift) * 0.25),
+        calc(var(--particle-rise) * -1.05),
+        0
+      )
+      scale(0.5)
+      rotate(360deg);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   PARTICLE WRAPPER
+   ========================================================= */
+
+.particle-3d {
+  position: absolute;
+  bottom: -70px;
+
+  display: block;
+
+  transform-style: preserve-3d;
+
+  filter: blur(var(--particle-blur));
+
+  animation-name: particle-float-3d;
+  animation-duration: var(--particle-duration);
+  animation-delay: var(--particle-delay);
+
+  animation-timing-function:
+    cubic-bezier(.22, 1, .36, 1);
+
+  animation-iteration-count: infinite;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   GLASS PARTICLE BODY
+   ========================================================= */
+
+.particle-glass {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.78) 12%,
+      rgba(198, 87, 123, 0.72) 38%,
+      rgba(122, 46, 68, 0.35) 65%,
+      rgba(122, 46, 68, 0) 100%
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.85),
+    inset -1px -1px 3px rgba(122, 46, 68, 0.18),
+    0 0 8px rgba(198, 87, 123, 0.25),
+    0 0 20px rgba(198, 87, 123, 0.12);
+
+  transform: translateZ(15px);
+}
+
+
+/* =========================================================
+   MAIN REFLECTION
+   ========================================================= */
+
+.particle-highlight {
+  position: absolute;
+
+  left: 18%;
+  top: 14%;
+
+  width: 34%;
+  height: 34%;
+
+  display: block;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  filter: blur(0.6px);
+
+  transform: translateZ(30px);
+
+  animation:
+    particle-shine 3.8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SECOND REFLECTION
+   ========================================================= */
+
+.particle-reflection {
+  position: absolute;
+
+  right: 17%;
+  bottom: 17%;
+
+  width: 18%;
+  height: 18%;
+
+  display: block;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.48);
+
+  filter: blur(0.5px);
+
+  transform: translateZ(22px);
+
+  animation:
+    particle-reflection 4.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   OUTER AURA
+   ========================================================= */
+
+.particle-aura {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 240%;
+  height: 240%;
+
+  display: block;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(198, 87, 123, 0.18) 0%,
+      rgba(198, 87, 123, 0.08) 35%,
+      rgba(198, 87, 123, 0) 72%
+    );
+
+  transform:
+    translate(-50%, -50%)
+    translateZ(-15px);
+
+  filter: blur(5px);
+
+  opacity: 0.8;
+
+  animation:
+    particle-aura 5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   GLASS HIGHLIGHT BREATHING
+   ========================================================= */
+
+@keyframes particle-shine {
+  0%,
+  100% {
+    opacity: 0.3;
+
+    transform:
+      translateZ(30px)
+      scale(0.75);
+  }
+
+  50% {
+    opacity: 0.95;
+
+    transform:
+      translateZ(35px)
+      scale(1.25);
+  }
+}
+
+
+/* =========================================================
+   SECOND REFLECTION MOTION
+   ========================================================= */
+
+@keyframes particle-reflection {
+  0%,
+  100% {
+    opacity: 0.2;
+
+    transform:
+      translateZ(22px)
+      scale(0.75);
+  }
+
+  50% {
+    opacity: 0.7;
+
+    transform:
+      translateZ(28px)
+      scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   AURA BREATHING
+   ========================================================= */
+
+@keyframes particle-aura {
+  0%,
+  100% {
+    opacity: 0.3;
+
+    transform:
+      translate(-50%, -50%)
+      translateZ(-15px)
+      scale(0.8);
+  }
+
+  50% {
+    opacity: 0.85;
+
+    transform:
+      translate(-50%, -50%)
+      translateZ(-10px)
+      scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   ENVELOPE
+   ========================================================= */
+
+.envelope-flap {
+  transform-origin: top center;
+
+  transition:
+    transform 700ms cubic-bezier(.4, 0, .2, 1);
+
+  backface-visibility: hidden;
+}
+
+.envelope-flap.open {
+  transform: rotateX(-168deg);
+}
+
+.bucket-done {
+  text-decoration: line-through;
+  opacity: .55;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
