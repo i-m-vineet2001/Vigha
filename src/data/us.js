@@ -28,6 +28,11 @@ export const img = {
     "https://media.base44.com/images/public/6abc93b5b018fd9b879d9e78/a6cb9fd14_generated_image.png",
   cover3:
     "https://media.base44.com/images/public/6abc93b5b018fd9b879d9e78/a39d05fde_generated_image.png",
+  cover4: "/images/song4.jpg",
+  cover5: "/images/song5.jpg",
+  cover6: "/images/song7.jpg",
+  cover7: "/images/song6.jpg",
+  cover8: "/images/song8.jpg",
 };
 
 export const couple = {
@@ -189,6 +194,45 @@ export const songs = [
     src: "/audio/our-song3.mp3",
     duration: 245,
     note: "only for you.",
+  },
+  {
+    title: "Kabira - Yeh Jawaani Hai Deewani",
+    artist: "Arijit Singh, Shreya Ghosal",
+    cover: img.cover4,
+    src: "/audio/our-song4.mp3",
+    duration: 315,
+    note: "For the nights the distance feels loud.",
+  },
+  {
+    title: "Subhanallah - Yeh Jawaani Hai Deewani",
+    artist: "Sreeram, Shilpa Rao, Pritam, Irshad Kamil",
+    cover: img.cover5,
+    src: "/audio/our-song5.mp3",
+    duration: 300,
+    note: "The joy feels like this.",
+  },
+  {
+    title: "Mere naam Tu - Zero",
+    artist: "Arijit Singh, Abhay Jodhpurkar, Ajay-Atul, Irshad Kamil",
+    cover: img.cover6,
+    src: "/audio/our-song6.mp3",
+    duration: 270,
+    note: "The colour of Love",
+  },
+  {
+    title: "Mujhse Dosti Karoge - Mujhse Dosti Karoge",
+    artist: "Udit Narayan, Alka Yagnik, Anu Malik, Sameer",
+    cover: img.cover7,
+    src: "/audio/our-song7.mp3",
+    duration: 270,
+    note: "The friendship that started it all.",
+  },
+  {
+    title: "I Love You - Bodyguard",
+    artist: "Ash King, Clinton Cerejo",
+    cover: img.cover8,
+    duration: 257,
+    note: "I love you... and I always will. ❤️",
   },
 ];
 
